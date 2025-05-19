@@ -1,0 +1,3 @@
+colorscheme darkblue
+
+set number

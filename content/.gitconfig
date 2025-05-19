@@ -1,0 +1,23 @@
+[core]
+ excludesfile = ~/.gitignore
+[user]
+	name = Christopher Leinbach
+	email = christopher.leinbach@gmail.com
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[push]
+  autoSetupRemote = true
+[alias]
+  # Get latest tag if it exists.
+  lt = !git describe --tags --abbrev=0 2> /dev/null
+  # Get log in one line.
+  lg = !git log --oneline
+  # Get log with no colors with specific format.
+  cl = !git log --no-merges --format='- %h | %cD | %aN (%aE) | %B'
+  # Get log from latest tag to now in one line.
+  lgt = !git log $(git lt || echo "")..HEAD --oneline
+  # Get log with no colors with specific format from latest tag to now.
+  clt = !git log $(git lt || echo "")..HEAD --no-merges --format='- %h | %cD | %aN (%aE) | %B'
