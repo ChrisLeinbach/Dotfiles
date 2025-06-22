@@ -4,6 +4,8 @@
 [user]
 	name = Christopher Leinbach
 	email = christopher.leinbach@gmail.com
+[init]
+  defaultBranch = main
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
