@@ -119,3 +119,14 @@ fi
 ### CUSTOM - Above is Ubuntu Defaults
 # Set the Bash Prompt
 export PS1="\[\e[93m\]\u@\h \[\e[92m\]\w\[\e[95m\]\$(__git_ps1) \[\e[91m\][\$?]\[\e[00m\]\$ "
+
+# Add a Reboot to Windows Command for Dual-Boot Systems
+# See https://unix.stackexchange.com/questions/43196/how-can-i-tell-grub-i-want-to-reboot-into-windows-before-i-reboot
+# Note: Recommended permissions on /boot/grub/grub.cfg are 0600 so sudo is needed on Grep.
+reboot_to_windows ()
+{
+    WINDOWS_TITLE=`sudo grep -i "^menuentry 'Windows" /boot/grub/grub.cfg|head -n 1|cut -d"'" -f2`
+    sudo grub-reboot "$WINDOWS_TITLE"
+    sudo reboot
+}
+alias windows-reboot='reboot_to_windows'
